@@ -19,18 +19,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
- 
- 
+
+
 #ifndef MBED_FUTABA_SBUS_H
 #define MBED_FUTABA_SBUS_H
- 
+
 #define SBUS_SIGNAL_OK          0x00
 #define SBUS_SIGNAL_LOST        0x01
 #define SBUS_SIGNAL_FAILSAFE    0x03
- 
+
 #include "MODSERIAL.h"
 #include "mbed.h"
- 
+
 /** SBUS control class, based on MODSERIAL
  *
  * Example:
@@ -56,7 +56,7 @@
  * }
  * @endcode
  */
- 
+
 class FutabaSBUS {
 public:
     /** create a FutabaSBUS object connected to the specified serial pins
@@ -76,37 +76,37 @@ public:
     * &param range 0..1
     */
     uint8_t digichannel(uint8_t ch);
- 
+
     /** Set servo position, raw data, range 200..2000?
     *
     * &param raw data 0..2048
     */
     void servo(uint8_t ch, int16_t position);
- 
+
     /** Set digital channel, 0..1
     *
     * &param range 0..1
     */
     void digiservo(uint8_t ch, uint8_t position);
- 
+
     /** Read failsafe condition
     *
     * &param 0=no failsafe 1=lost signal 3=failsafe
     */
     uint8_t failsafe(void);
- 
+
     /** Set logical data passtrough - servo values are ignored, using received data
     *
     * &param bool
     */
     void passthrough(bool mode);
- 
+
     /** Read logical data passtrough
     *
     * &param bool
     */
     bool passthrough(void);
- 
+
 private:
     MODSERIAL sbus_;
     Ticker  rxSBUS;
@@ -117,6 +117,5 @@ private:
     volatile int rx_timeout;
     volatile int tx_timeout;
 };
- 
+
 #endif
-            
